@@ -39,7 +39,7 @@ def finge_data(namep,name):
     src = namep + '/' + 'Finger_Print'
     fl = os.listdir(src)
     for f in fl:
-        if f != '.DS_Store':
+        if f != '.DS_Store' and '._' not in f:
             fp = os.path.join(src,f)
             print 'Finger',fp
             (h,d) = phone_information(fp)
@@ -48,7 +48,7 @@ def finge_data(namep,name):
             fId = ''
             for f1 in os.listdir(fp):
                 fp1 = os.path.join(fp,f1)
-                if 'df' in f1:
+                if 'df' in f1 and '._' not in f1:
                     (st,et,fId) = firstAndLastLine(fp1)
                     signal_data(namep, st, et,name,fp,fId)
             if len(fId) == 0 or len(st) == 0 or len(et) == 0:
@@ -85,11 +85,11 @@ def copy_signal_data(src,f,name,fpp,fId):
             dst = sdst
             break
     for f in os.listdir(src):
-        if f != '.DS_Store':
+        if f != '.DS_Store' and '._' not in f:
             fp = os.path.join(src,f)
             _copy(fp, dst)
             for fpf in os.listdir(fpp):
-                if f != '.DS_Store':
+                if f != '.DS_Store' and '._' not in f:
                     fpfp = os.path.join(fpp, fpf)
                     if 'df' in fpf or 'ins' in fpf or 'deviceinfo' in fpf or 'headinfo' in fpf:
                         _copy(fpfp,os.path.join(dst,'finger_print'))
@@ -98,7 +98,7 @@ def signal_data(src, st, et,name,fpp,fId):
     src = src + '/' + 'signal_data'
     fl = os.listdir(src)
     for f in fl:
-        if f != '.DS_Store':
+        if f != '.DS_Store' and '._' not in f:
             fp = os.path.join(src,f)
             for f1 in os.listdir(fp):
                 if f1 == 'allsensordata.txt':
@@ -141,7 +141,7 @@ def firstAndLastLine(src):
 def main_function(src):
     fl = os.listdir(src)
     for f in fl:
-        if f not in ['.DS_Store','result']:
+        if f not in ['.DS_Store','result'] and '._' not in f:
             print 'persion name ', f
             finge_data(os.path.join(src,f),f)
 if __name__=='__main__':
